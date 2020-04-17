@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>信息审核</title>
+    <script src="../static/js/jquery-1.11.0.js"></script>
+    <style>
+        #id1 {
+            background-color: #5396FC;
+            border: 1px solid black;
+            margin: 0 auto;
+            width: 500px;
+            height: 500px;
+        }
+
+        #id2 {
+            margin: 0 auto;
+            padding-left: 60px;
+            padding-top: 60px;
+            width: 500px;
+            height: 500px;
+        }
+    </style>
+    <script>
+
+      function send() {
+          var email=document.getElementById("enterpriseEmail").value;
+          if (email) {
+            // window.location.href="http://localhost:8081/SendEmailServlet?email="+email;
+            window.location.href="/SendEmailServlet?enterpriseEmail="+email;
+             alert("验证码发送成功，请注意查收");
+          }else{
+              alert("邮箱发送失败");
+              var hide=document.getElementById("notice");
+              hide.innerHTML="请先填写邮箱";
+          }
+
+      }
+
+      //校验邮箱
+      function checkEmail(){
+          //获取邮箱内容
+          var email = document.getElementById("email").value ;
+          //获取span标签对象
+          var emailSpan = document.getElementById("email_span") ;
+          //邮箱:数字或者字母@数字或者字母(.com/.cn/.com.cn/.....)
+          //本身是.  --->\.
+          //本身是\  ----->\\
+          var reg = /^[a-zA-Z0-9]+@[a-zA-Z0-9]+(\.[a-zA-Z]{2,3}){1,2}$/ ;
+          if(reg.test(email)){
+            emailSpan.innerHTML = "";
+            return true ;
+
+          }else{
+              emailSpan.innerHTML ="邮箱格式有误,请重新输入".fontcolor("red").fontsize("1px") ;
+              return false ;
+          }
+      }
+          //校验身份证号
+          function checkID(){
+              var ID=document.getElementById("ID").value ;
+              var IDSpan=document.getElementById("ID_span");
+              var reg = /^[0-9a-zA-Z]{18}$/ ;
+              if(reg.test(ID)){
+                  IDSpan.innerHTML="";
+              }else{
+                  IDSpan.innerHTML="请输入正确的身份证号".fontcolor("red").fontsize("1px");
+              }
+          }
+
+    </script>
+</head>
+<body>
+<fieldset id="id1">
+    <legend>企业认证</legend>
+    <form th:action="@{http://localhost:8081/doCertify/{na}(na=${phone_number})}" id="id2" method="get">
+        真实姓名：<input type="text" name="username"/><br/><br/>
+        身份证号：<input type="text" name="idCard"  id="ID" placeholder="请输入真实身份证号" onblur="checkID()"/><span id="ID_span"></span><br/><br/>
+        个人邮箱：<input type="email" name="email" id="email" placeholder="请输入个人邮箱" onblur="checkEmail()"/><span id="email_span"></span><br/><br/>
+        所在企业：<input type="text" name="enterprise"/><br/><br/>
+        企业邮箱：<input type="email" name="enterpriseEmail" id="enterpriseEmail" onblur="checkEmail()"/><br/><br/>
+        <span id="notice"></span><br/>
+        <input type="text" name="code"/><input type="button"  value="发送验证码" id="btn" onclick="send()"/><br/><br/>
+        <!--onclick="javascript:location.href='路径'"-->
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit">提交认证</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button><a href="/home">返回</a></button>
+    </form>
+</fieldset>
+
+
+
+</body>
+</html>

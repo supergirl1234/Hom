@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>注册界面</title>
+    <script>
+       /* 定义正则规则:
+        手机号由12位的数字组成
+        密码由6~16位的数字或字母组成
+        邮箱:数字或者字母@数字或者字母(.com/.cn/.com.cn/.....)*/
+        //校验手机号
+        function checkPhone(){
+            //获取手机号内容
+            var phone_number = document.getElementById("phone_number").value ;
+            //获取id="phone_span"的标签对象,设置他的innerHTML属性提示
+            var phoneSpan = document.getElementById("phone_span") ;
+            //规则:由12位的数字组成
+            var reg = /^[0-9]{11}$/ ;
+            //校验
+            if(reg.test(phone_number)){
+                //成功,提示
+                phoneSpan.innerHTML = "" ;
+                return true ;
+            }else{
+                phoneSpan.innerHTML = "手机号错误".fontcolor("red").fontsize("1px");
+                return false ;
+            }
+        }
+
+        //校验密码
+        function checkPwd(){
+            //获取密码内容
+            var pwd  = document.getElementById("password").value ;
+            //获取span标签对象
+            var pwdSpan = document.getElementById("pwd_span") ;
+            //密码由6~16位的数字或字母组成
+            var reg  = /^[a-zA-Z0-9]{6,16}$/ ;
+            if(reg.test(pwd)){
+                pwdSpan.innerHTML = "";
+                return true ;
+            }else{
+                pwdSpan.innerHTML = "密码格式不正确,需由由6~16位的数字或字母组成".fontcolor("red").fontsize("1px");
+                return false ;
+            }
+        }
+
+
+       function checkRePwd(){
+           //获取密码内容
+           var pwd  = document.getElementById("password").value ;
+           var rePwd  = document.getElementById("rePassword").value ;
+           //获取span标签对象
+           var rePwdSpan = document.getElementById("rePwd_span") ;
+
+           if(pwd==rePwd){
+               rePwdSpan.innerHTML = "";
+               return true ;
+           }else{
+               rePwdSpan.innerHTML = "两次输入内容不一致".fontcolor("red").fontsize("1px") ;
+               return false ;
+           }
+       }
+
+
+        //校验全部的内容
+        function checkAll(){
+            //校验的全部内容,然后提交到后台
+            if(checkUserName() && checkPwd() && checkRePwd()){
+                return true ;
+            }else{
+                return false ;
+            }
+        }
+    </script>
+    <style>
+        #id1{
+            background-color:#5396FC;
+            border: 1px solid black;
+            margin: 0 auto ;
+            width: 500px;
+            height: 300px;
+        }
+        #id2{
+            margin: auto;
+            padding-top: 50px;
+            padding-left: 50px;
+            width: 500px;
+            height: 300px;
+        }
+    </style>
+</head>
+<body>
+<div id="id1">
+<form action="/doRegister" onsubmit="return checkAll()" method="get"  id="id2">
+    手 机  &nbsp;号：<input type="text" name="phone_number" id="phone_number" placeholder="请输入手机号" onblur="checkPhone()"/><span id="phone_span"></span><br/><br/>
+    昵 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;称：<input type="text" name="username" placeholder="请输入名字"/><br/><br/>
+    密 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;码：<input type="password" name="password"  id="password" onblur="checkPwd()"/><span id="pwd_span"></span><br/><br/>
+    确认密码：<input type="password" name="rePassword"  id="rePassword" onblur="checkRePwd()"/><span id="rePwd_span"></span><br/><br/>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button type="submit" value="注册">注册</button>
+</form>
+</div>
+</body>
+</html>

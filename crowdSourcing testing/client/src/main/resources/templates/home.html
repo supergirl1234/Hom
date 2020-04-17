@@ -1,0 +1,105 @@
+
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>首页</title>
+    <style>
+
+        #id0{
+            border: 1px solid black;
+            width: 70%;
+            margin: 0 auto;
+        }
+        #divTop{
+            background-color:#5396FC;
+            padding-top:2% ;
+            padding-bottom:2% ;
+            height: 4%;
+            border: 1px solid black;
+        }
+        #span1{
+            padding-left: 3%;
+            font-weight: bolder;
+        }
+        #span2{
+            padding-right: 3%;
+            float: right;
+        }
+        #divBottom{
+            height: 90%;
+            border: 1px solid black;
+        }
+        #divLeft{
+            background-color:#5396FC;
+            width: 20%;
+            height: 100%;
+            float: left;
+        }
+        #divMain{
+            background-color: whitesmoke;
+            height: 100%;
+        }
+        #divLeft a{
+            text-decoration: none;
+            font-color: black;
+            font-weight: bolder;
+        }
+
+    </style>
+
+</head>
+<body id="id0">
+
+<div id="divTop">
+    <!--  <p th:text="${#request.getAttribute('account').getUsername()}"></p>-->
+    <span th:text="${account.getUsername()}" id="span1"></span>
+    <span  id="span2">用户社区</span>
+
+</div>
+<div id="divBottom">
+    <div id="divLeft">
+
+        <table>
+            <br/>
+            <br/>
+            <tr>
+                <td><a th:href="@{http://localhost:8081/Certify/{na}(na=${account.getPhone_number()})}" target="_parent">信息审核</a></td>
+            </tr>
+
+            <tr>
+                <td>
+                    <a th:href="@{http://localhost:8081/Statistic/{na}(na=${account.getPhone_number()})}" target="_blank">统计分析</a>
+                </td>
+            </tr>
+        </table>
+    </div>
+    <div id="divMain">
+     <!--   <iframe src="iframeRight.html" style="height: 100%" frameborder="0" marginwidth="0" marginheight="0">
+        </iframe>-->
+
+        <table th:border="1" align="center"  cellspacing="0" bgcolor="#a9a9a9">
+            <caption align="top">所有测试项目</caption>
+           &nbsp;
+            <tr align="center">
+                <td>项目编号</td>
+                <td>项目名称</td>
+                <td>项目测试类型</td>
+                <td>项目开始时间</td>
+                <td colspan="2">项目结束时间</td>
+
+            </tr>
+           <!-- <script>firstpage()</script>-->
+            
+            <tr th:each="project:${allProjects}" align="center">
+                <td th:text="${project.project_id}"></td>
+                <td th:text="${project.project_name}"></td>
+                <td th:text="${project.project_type}"></td>
+                <td th:text="${project.start}"></td>
+                <td th:text="${project.end}"></td>
+                <td th:text="去测试"></td>
+            </tr>
+        </table>
+    </div>
+</div>
+</body>
+</html>

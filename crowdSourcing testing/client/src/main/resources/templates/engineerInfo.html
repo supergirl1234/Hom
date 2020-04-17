@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>认证信息</title>
+    <style>
+        #id1{
+            background-color: #5396FC;
+            border: 1px solid black;
+            margin: 0 auto;
+            width:500px;
+            height: 400px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div id="id1">
+
+    <table>
+        <thead>认证信息：</thead>
+        <tr>
+            <td> 手 机&nbsp;&nbsp;号：</td>
+            <td><p th:text="${engineerInfo.getPhone_number()}"></p></td>
+        </tr>
+        <tr>
+            <td> 姓&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 名：</td>
+            <td><p th:text="${engineerInfo.getRealName()}"></p></td>
+        </tr>
+        <tr>
+            <td>  身份证号：</td>
+            <td><p th:text="${engineerInfo.getID()}"></p></td>
+        </tr>
+        <tr>
+            <td> 个人邮箱：</td>
+            <td><p th:text="${engineerInfo.getEmail()}"></p></td>
+        </tr>
+        <tr>
+            <td> 所在企业：</td>
+            <td><p th:text="${engineerInfo.getEnterprise()}"></p></td>
+        </tr>
+        <tr>
+            <td>   企业邮箱：</td>
+            <td><p th:text="${engineerInfo.getEnterpriseEmail()}"></td>
+        </tr>
+    </table>
+</div>
+
+</body>
+</html>

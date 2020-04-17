@@ -1,0 +1,13 @@
+server:
+  port: 8081
+spring:
+ thymeleaf:
+    prefix: classpath:/templates/
+    suffix: .html
+    encoding: UTF-8
+    mode: HTML
+ datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/crowdSourcing?useUnicode=true&characterEncoding=utf-8
+    username: root
+    password: mysql0205
